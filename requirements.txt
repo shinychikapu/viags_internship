@@ -1,0 +1,24 @@
+# Core app
+streamlit>=1.40
+
+# Data handling
+pandas>=2.2
+numpy>=1.26
+openpyxl>=3.1      # lets pandas read .xlsx Excel files
+
+# Charts
+plotly>=5.24
+
+# Data layer (Excel -> DB -> app)
+sqlalchemy>=2.0
+psycopg2-binary>=2.9        # Postgres driver (prod)
+pandera>=0.18               # schema-as-code validation in the ETL
+python-dotenv>=1.0          # load DATABASE_URL from .env in dev
+
+# Analytics / ML
+scikit-learn>=1.4           # PCA explorer (StandardScaler + OneHotEncoder + ColumnTransformer)
+# statsmodels removed — SARIMAX forecast dropped from v1 (see plan rationale).
+# scipy   — would only be needed once the deferred stats-tests pack ships.
+
+# --- add later when you wire up the real version ---
+# streamlit-authenticator>=0.3   # proper login (hashed passwords, cookies)
