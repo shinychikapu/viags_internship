@@ -7,6 +7,7 @@ are resolved at read time via LEFT JOINs in data.load_employees().
 """
 import os
 import pathlib
+import streamlit as st
 
 from dotenv import load_dotenv
 from sqlalchemy import (
@@ -17,7 +18,11 @@ from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
 load_dotenv()
 DEFAULT_SQLITE_URL = "sqlite:///viags.db"
-DATABASE_URL = os.environ.get("DATABASE_URL", DEFAULT_SQLITE_URL)
+DATABASE_URL = (
+    os.getenv("DATABASE_URL")
+    or st.secrets.get("DATABASE_URL")
+    or DEFAULT_SQLITE_URL
+)
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite:///") else {}
 engine = create_engine(DATABASE_URL, future=True, connect_args=connect_args)
 
